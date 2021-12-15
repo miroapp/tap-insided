@@ -73,7 +73,7 @@ def sync_endpoint(client, #pylint: disable=too-many-statements
 
         if data is None:
             return
-
+        records = []
         if endpoint.get('number_indexed'):
             records = []
             for index, value in data.items():
@@ -82,7 +82,7 @@ def sync_endpoint(client, #pylint: disable=too-many-statements
                     records.append(value)
                 except: # pylint: disable=bare-except
                     pass
-        else:
+        elif 'result' in data:
             records = data['result']
             if not isinstance(records, list):
                 records = [records]
